@@ -2,6 +2,14 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    current_iteration = models.IntegerField(default=1)
+    last_completed_survey = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
+
 class Survey(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='surveys/images/', null=True, blank=True)

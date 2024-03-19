@@ -1,8 +1,8 @@
 /* General Styles */
 body {
   margin: 0;
-  font: 100%/1.414 "Open Sans", "Roboto", Arial, sans-serif;
-  background: #000;
+  font: 100%/1.6 "Open Sans", "Roboto", Arial, sans-serif;
+  background: #333;
   color: #fff;
 }
 
@@ -14,45 +14,50 @@ a,
 /* Header Styles */
 #main-navbar {
   color: #fff;
-  min-height: 14vh;
-  font-size: 15px;
+  min-height: 10vh;
+  font-size: 1rem;
+}
+
+#d-flex {
+  display: flex;
+  justify-content: flex-end;
 }
 
 #authstyle {
-  margin-left: 17%;
+  margin-left: 1rem;
   border-radius: 50%;
 }
 
 #header-text {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
-  font-size: 50px;
-  margin-top: 100px;
+  font-size: 3rem;
+  margin-top: 2rem;
 }
 
 #header-image {
-  margin-top: 30px;
+  margin-top: 1rem;
 }
 
 #header-paragraph {
-  font-size: 20px;
-  padding-top: 30px;
+  font-size: 1.4rem;
+  padding-top: 1rem;
   font-weight: lighter;
 }
 
 #header-h1 {
-  font-size: 60px;
+  font-size: 3.5rem;
 }
 
 #header-links,
 #body-link-row {
   position: relative;
-  border-radius: 20px;
+  border-radius: 2rem;
   display: inline-block;
-  padding: 10px 25px;
+  padding: 1rem 2rem;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 1rem;
   overflow: hidden;
   transition: 0.2s;
 }
@@ -60,65 +65,64 @@ a,
 #header-links:hover,
 #body-link-row:hover {
   color: #fff;
-  font-size: 15px;
-  border-radius: 6px;
+  font-size: 1.1rem;
+  border-radius: 1rem;
   background-color: #000;
-  box-shadow: 0 0 10px #fff, 0 0 4px #fff, 0 0 80px #fff;
+  box-shadow: 0 0 10px #fff, 0 0 4px #fff, 0 0 8rem #fff;
   transition-delay: 0.1s;
   text-decoration: none;
-  border-radius: 9px;
 }
 
 #header-links:active,
 #body-link-row:active {
-  font-size: 10px;
+  font-size: 0.9rem;
 }
 
 /* Footer Styles */
 #main-footer {
-  margin-top: 510px;
+  margin-top: 5rem;
   color: #fff;
   min-height: 10vh;
-  font-size: 15px;
+  font-size: 1rem;
 }
 
 #footer {
-  margin-left: 1000px;
-  background-color: rgba(102, 102, 102, 0.137);
+  margin-left: 10rem;
+  background-color: rgba(102, 102, 102, 0.1);
 }
 
 /* Login Styles */
 .login-wrap {
   width: 100%;
   margin: auto;
-  max-width: 525px;
-  min-height: 670px;
+  max-width: 40rem;
+  min-height: 42rem;
   position: relative;
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1), 0 1.5rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 
 .login-html {
   width: 100%;
   height: 100%;
   position: absolute;
-  padding: 90px 70px 50px 70px;
+  padding: 6rem 5rem 3rem 5rem;
   background: rgba(255, 255, 255, 0);
 }
 
 .login-form {
-  min-height: 345px;
+  min-height: 21.6rem;
   position: relative;
   perspective: 1000px;
   transform-style: preserve-3d;
 }
 
 .group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .label {
   color: #aaa;
-  font-size: 12px;
+  font-size: 0.9rem;
 }
 
 .input,
@@ -131,8 +135,8 @@ a,
 .input,
 .button {
   border: none;
-  padding: 15px 20px;
-  border-radius: 25px;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
   background: rgba(255, 255, 255, .1);
 }
 
@@ -147,12 +151,12 @@ a,
 
 .btn--form {
   padding: .5rem 2.5rem;
-  font-size: .95rem;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   color: #fff;
   background: #000;
-  border-radius: 35px;
+  border-radius: 3.5rem;
 }
 
 .signup__container,
@@ -171,10 +175,10 @@ a,
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 800px;
-  height: 480px;
-  border-radius: 3px;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, .25);
+  width: 50rem;
+  height: 30rem;
+  border-radius: 2rem;
+  box-shadow: 0 0.9rem 2.1rem rgba(0, 0, 0, .25);
 }
 
 .signup__overlay {
@@ -207,7 +211,7 @@ a,
 }
 
 .signup__link {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-decoration: underline;
   color: #999;
@@ -216,11 +220,10 @@ a,
 /* Button Hover Effect */
 #signup-button:hover {
   color: #fff;
-  font-size: 15px;
-  border-radius: 6px;
+  font-size: 1.1rem;
+  border-radius: 1rem;
   background-color: #000;
-  box-shadow: 0 0 10px #fff, 0 0 4px #fff, 0 0 80px #fff;
+  box-shadow: 0 0 10px #fff, 0 0 4px #fff, 0 0 8rem #fff;
   transition-delay: 0.1s;
   text-decoration: none;
-  border-radius: 9px;
 }
