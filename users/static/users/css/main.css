@@ -1,0 +1,226 @@
+/* General Styles */
+body {
+  margin: 0;
+  font: 100%/1.414 "Open Sans", "Roboto", Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+a,
+[type="submit"] {
+  transition: all 0.25s ease-in;
+}
+
+/* Header Styles */
+#main-navbar {
+  color: #fff;
+  min-height: 14vh;
+  font-size: 15px;
+}
+
+#authstyle {
+  margin-left: 17%;
+  border-radius: 50%;
+}
+
+#header-text {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
+  margin-top: 100px;
+}
+
+#header-image {
+  margin-top: 30px;
+}
+
+#header-paragraph {
+  font-size: 20px;
+  padding-top: 30px;
+  font-weight: lighter;
+}
+
+#header-h1 {
+  font-size: 60px;
+}
+
+#header-links,
+#body-link-row {
+  position: relative;
+  border-radius: 20px;
+  display: inline-block;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 13px;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+#header-links:hover,
+#body-link-row:hover {
+  color: #fff;
+  font-size: 15px;
+  border-radius: 6px;
+  background-color: #000;
+  box-shadow: 0 0 10px #fff, 0 0 4px #fff, 0 0 80px #fff;
+  transition-delay: 0.1s;
+  text-decoration: none;
+  border-radius: 9px;
+}
+
+#header-links:active,
+#body-link-row:active {
+  font-size: 10px;
+}
+
+/* Footer Styles */
+#main-footer {
+  margin-top: 510px;
+  color: #fff;
+  min-height: 10vh;
+  font-size: 15px;
+}
+
+#footer {
+  margin-left: 1000px;
+  background-color: rgba(102, 102, 102, 0.137);
+}
+
+/* Login Styles */
+.login-wrap {
+  width: 100%;
+  margin: auto;
+  max-width: 525px;
+  min-height: 670px;
+  position: relative;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0), 0 17px 50px 0 rgba(0, 0, 0, .19);
+}
+
+.login-html {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 90px 70px 50px 70px;
+  background: rgba(255, 255, 255, 0);
+}
+
+.login-form {
+  min-height: 345px;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.group {
+  margin-bottom: 15px;
+}
+
+.label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.input,
+.button {
+  width: 100%;
+  color: #fff;
+  display: block;
+}
+
+.input,
+.button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .1);
+}
+
+.input[data-type="password"] {
+  text-security: circle;
+  -webkit-text-security: circle;
+}
+
+.button {
+  background: #000;
+}
+
+.btn--form {
+  padding: .5rem 2.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: #000;
+  border-radius: 35px;
+}
+
+.signup__container,
+.signup__overlay {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  transform: translateY(-50%);
+}
+
+.signup__container {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+  height: 480px;
+  border-radius: 3px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, .25);
+}
+
+.signup__overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .76);
+}
+
+.thumbnail__logo {
+  align-self: flex-start;
+}
+
+.thumbnail__content {
+  align-self: center;
+}
+
+.thumbnail__links {
+  align-self: flex-end;
+  width: 100%;
+}
+
+.thumbnail__links a {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.signup__form {
+  padding: 2.5rem;
+  background: #fafafa;
+}
+
+.signup__link {
+  font-size: .8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #999;
+}
+
+/* Button Hover Effect */
+#signup-button:hover {
+  color: #fff;
+  font-size: 15px;
+  border-radius: 6px;
+  background-color: #000;
+  box-shadow: 0 0 10px #fff, 0 0 4px #fff, 0 0 80px #fff;
+  transition-delay: 0.1s;
+  text-decoration: none;
+  border-radius: 9px;
+}
