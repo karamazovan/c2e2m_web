@@ -7,7 +7,7 @@
     <div class="row g-0">
         <div class="col-sm-6 col-md-8" id="header-text">
           {% if request.user.is_authenticated %}
-              <a href="{% url 'survey' %}" class="btn btn-custom" id="body-link-row">Survey</a>
+              <a href="{% url 'survey:index' %}" class="btn btn-custom" id="body-link-row">Survey</a>
           {% else %}
               <a href="{% url 'login' %}" class="btn btn-custom">Login to Access Survey</a>
           {% endif %}

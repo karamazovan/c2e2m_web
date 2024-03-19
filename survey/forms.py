@@ -8,3 +8,7 @@ class SurveyForm(forms.ModelForm):
     class Meta:
         model = Response
         fields = ['preferred_music']
+class VoteForm(forms.ModelForm):
+    class Meta:
+        model = Response
+        fields = ['preferred_music']  # Update with the actual fields you need for voting

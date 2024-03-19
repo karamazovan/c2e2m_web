@@ -1,21 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'survey/base.html' %}
 
 {% block content %}
-<h2>{{ survey.title }}</h2>
-<form action="{% url 'submit_vote' survey.id %}" method="post">
+<form method="post">
     {% csrf_token %}
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="music_choice" id="music1" value="1">
-      <label class="form-check-label" for="music1">
-        Music 1
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="music_choice" id="music2" value="2">
-      <label class="form-check-label" for="music2">
-        Music 2
-      </label>
-    </div>
+    {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Submit Vote</button>
 </form>
 {% endblock %}

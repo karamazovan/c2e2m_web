@@ -1,0 +1,11 @@
+{% extends 'survey/base.html' %}
+
+{% block content %}
+<h1>Survey Results</h1>
+<h3>{{ survey.title }}</h3>
+<div>
+    <p>Music 1 votes: {{ survey.response_set.filter(preferred_music=1).count }}</p>
+    <p>Music 2 votes: {{ survey.response_set.filter(preferred_music=2).count }}</p>
+</div>
+<a href="{% url 'survey:index' %}" class="btn btn-secondary mt-3">Back to Surveys</a>
+{% endblock %}

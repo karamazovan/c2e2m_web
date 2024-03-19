@@ -1,0 +1,23 @@
+{% extends 'survey/base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ survey.title }}</h5>
+    {% if survey.image %}
+    <img src="{{ survey.image.url }}" class="card-img-top" alt="Survey Image">
+    {% endif %}
+    <p class="card-text">Please listen to the music and make your choice.</p>
+    {% if survey.music_file_1 %}
+    <audio controls src="{{ survey.music_file_1.url }}">Your browser does not support the audio element.</audio>
+    {% endif %}
+    {% if survey.music_file_2 %}
+    <audio controls src="{{ survey.music_file_2.url }}">Your browser does not support the audio element.</audio>
+    {% endif %}
+    <a href="{% url 'survey:vote' survey.id %}" class="btn btn-primary mt-3">Vote Now</a>
+  </div>
+</div>
+{% if next_survey_exists %}
+    <a href="{% url 'survey:detail' next_survey_id %}" class="btn btn-primary">Next Survey</a>
+{% endif %}
+{% endblock %}
