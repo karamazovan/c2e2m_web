@@ -1,9 +1,14 @@
 {% extends 'survey/base.html' %}
-
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+        <div>
+            <!-- Use '{{ field.label_tag }}' to automatically generate the label with the correct 'for' attribute -->
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+    {% endfor %}
     <button type="submit" class="btn btn-primary">Submit Vote</button>
 </form>
 {% endblock %}

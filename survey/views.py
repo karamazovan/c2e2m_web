@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .models import Survey, Response, UserProfile
-from .forms import VoteForm
+from .models import Survey, Response, UserProfile, Question, Demographic, SurveyResponse
+from .forms import VoteForm, ResponseForm, DemographicForm, ViewingExperienceForm
 from django.contrib.auth.decorators import login_required
 
 def index_view(request):
@@ -16,40 +16,95 @@ def survey_detail_view(request, survey_id):
     return render(request, 'survey/detail.html', {'survey': survey, 'next_survey_exists': next_survey_exists, 'next_survey_id': next_survey_id})
 
 @login_required
+def demographic_survey(request):
+    user_profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    try:
+        demographic = Demographic.objects.get(user=request.user)
+    except Demographic.DoesNotExist:
+        demographic = None
+
+    if request.method == 'POST':
+        form = DemographicForm(request.POST, instance=demographic)
+        if form.is_valid():
+            demographic = form.save(commit=False)
+            demographic.user = request.user
+            demographic.save()
+            return HttpResponseRedirect(reverse('survey:detail', args=(6,)))
+    else:
+        form = DemographicForm(instance=demographic)
+
+    return render(request, 'survey/demographic_survey.html', {'form': form})
+
+@login_required
 def vote(request, survey_id):
     survey = get_object_or_404(Survey, pk=survey_id)
+    questions = list(survey.questions.all())
     user_profile, _ = UserProfile.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
-        form = VoteForm(request.POST)
+        form = ResponseForm(request.POST, questions=questions)
         if form.is_valid():
             response = form.save(commit=False)
             response.survey = survey
             response.user = request.user
             response.save()
+            for question in questions:
+                field_name = f'question_{question.id}_preferred_music'
+                preferred_music = form.cleaned_data.get(field_name)
+                print(f"Attempting to save Response for Question ID: {question.id}, Preferred Music: {preferred_music}")
 
-            # 마지막 설문조사를 완료한 경우, 순환을 업데이트합니다.
-            if survey_id == 5:
-                user_profile.last_completed_survey = 0
-                if user_profile.current_iteration < 4:
-                    user_profile.current_iteration += 1
-                    next_survey_id = 1  # 다음 순환의 첫 번째 설문조사로 리디렉트합니다.
-                else:
-                    # 모든 순환을 완료한 경우, 감사 페이지로 리디렉트합니다.
-                    return redirect('survey:thank_you')
-            else:
-                user_profile.last_completed_survey = survey_id
-                next_survey_id = survey_id + 1  # 다음 설문조사로 넘어갑니다.
+                # Try-except block to catch and print any exceptions during Response object creation
+                try:
+                    response = Response.objects.create(
+                        survey=survey,
+                        user=request.user,
+                        question=question,
+                        preferred_music=preferred_music
+                    )
+                    print(f"Response saved: {response.id}")
+                except Exception as e:
+                    print(f"Error saving response for question {question.id}: {e}")
+                    # Optionally, handle the error more gracefully here
 
+            user_profile.current_iteration += 1
             user_profile.save()
-            return HttpResponseRedirect(reverse('survey:detail', args=(next_survey_id,)))
+
+            # Redirect to the next survey or a thank you page
+            if survey_id == 41:  # Assuming 29 is the last survey ID
+                if user_profile.current_iteration >= 40:
+                    return HttpResponseRedirect(reverse('survey:viewing_experience'))
+                else:
+                    next_survey_id = 1
+                    return HttpResponseRedirect(reverse('survey:detail', args=(next_survey_id,)))
+            else:
+                next_survey_id = survey_id + 1
+                return HttpResponseRedirect(reverse('survey:detail', args=(next_survey_id,)))
         else:
-            # 폼이 유효하지 않으면 에러 메시지를 표시합니다.
-            return render(request, 'survey/detail.html', {'survey': survey, 'form': form, 'error_message': "You didn't select a valid choice."})
+            print("Form errors:", form.errors)
+            return render(request, 'survey/vote.html',
+                          {'survey': survey, 'form': form, 'error_message': "Form is not valid."})
     else:
-        # GET 요청시 빈 폼을 제공합니다.
-        form = VoteForm()
-    return render(request, 'survey/vote.html', {'survey': survey, 'form': form})
+        form = VoteForm(questions=questions)
+        return render(request, 'survey/vote.html', {'survey': survey, 'form': form})
+
+@login_required
+def viewing_experience(request):
+    user_profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ViewingExperienceForm(request.POST)
+        if form.is_valid():
+            experience = form.save(commit=False)
+            experience.user = request.user
+            experience.save()
+
+            user_profile.stage = 'completed'
+            user_profile.save()
+
+            return redirect('survey:thank_you')
+    else:
+        form = ViewingExperienceForm()
+    return render(request, 'survey/viewing_experience.html', {'form': form})
 
 def survey_results(request, survey_id):
     survey = get_object_or_404(Survey, pk=survey_id)

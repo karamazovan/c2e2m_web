@@ -3,9 +3,36 @@
 {% block content %}
 <h1>Survey Results</h1>
 <h3>{{ survey.title }}</h3>
+
+<!-- Existing summary of votes -->
 <div>
     <p>Music 1 votes: {{ survey.response_set.filter(preferred_music=1).count }}</p>
     <p>Music 2 votes: {{ survey.response_set.filter(preferred_music=2).count }}</p>
 </div>
+
+<!-- Detailed table of individual responses -->
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Question</th>
+      <th>Preferred Music</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for response in survey.response_set.all %}
+      <tr>
+        <td>{{ response.user.username }}</td>
+        <td>{{ response.question.text }}</td>
+        <td>Music {{ response.preferred_music }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="3">No responses yet.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 <a href="{% url 'survey:index' %}" class="btn btn-secondary mt-3">Back to Surveys</a>
 {% endblock %}

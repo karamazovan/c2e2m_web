@@ -2,6 +2,10 @@
 
 {% block content %}
 <h1>Available Surveys</h1>
+<!-- Demographic Survey -->
+<div class="mb-3">
+    <a href="{% url 'survey:demographic_survey' %}" class="btn btn-primary">Start Survey</a>
+</div>
 <div class="list-group">
     {% for survey in surveys %}
     <a href="{% url 'survey:detail' survey.id %}" class="list-group-item list-group-item-action">
